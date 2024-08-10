@@ -1,23 +1,23 @@
 {
-  "name": "zotero-plugin-template",
-  "version": "2.0.2-beta.3",
-  "description": "Zotero Plugin Template",
+  "name": "zotero-new-tab-plugin",
+  "version": "0.0.1",
+  "description": "Zotero New Tab Plugin",
   "config": {
-    "addonName": "Zotero Plugin Template",
-    "addonID": "addontemplate@euclpts.com",
-    "addonRef": "addontemplate",
-    "addonInstance": "AddonTemplate",
-    "prefsPrefix": "extensions.zotero.addontemplate"
+    "addonName": "Zotero New Tab Plugin",
+    "addonID": "newtab@euclpts.com",
+    "addonRef": "newtab",
+    "addonInstance": "NewTab",
+    "prefsPrefix": "extensions.zotero.newtab"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/windingwind/zotero-plugin-template.git"
+    "url": "git+https://github.com/diiinesh/Zotero_new_tab"
   },
-  "author": "windingwind",
+  "author": "diiinesh",
   "bugs": {
-    "url": "https://github.com/windingwind/zotero-plugin-template/issues"
+    "url": "https://github.com/diiinesh/Zotero_new_tab/issues"
   },
-  "homepage": "https://github.com/windingwind/zotero-plugin-template#readme",
+  "homepage": "https://github.com/diiinesh/Zotero_new_tab#readme",
   "license": "AGPL-3.0-or-later",
   "scripts": {
     "start": "zotero-plugin serve",
