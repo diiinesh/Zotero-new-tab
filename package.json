@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/diiinesh/Zotero_new_tab"
+    "url": "git+https://github.com/diiinesh/Zotero_new_tab.git"
   },
   "author": "diiinesh",
   "bugs": {
@@ -28,6 +28,7 @@
     "update-deps": "npm update --save"
   },
   "dependencies": {
+    "zotero-plugin-scaffold": "^0.0.34",
     "zotero-plugin-toolkit": "^2.3.31"
   },
   "devDependencies": {
@@ -37,7 +38,6 @@
     "prettier": "^3.2.5",
     "typescript": "^5.4.5",
     "typescript-eslint": "^8.0.0-alpha.20",
-    "zotero-plugin-scaffold": "^0.0.26",
     "zotero-types": "^2.0.0"
   },
   "prettier": {

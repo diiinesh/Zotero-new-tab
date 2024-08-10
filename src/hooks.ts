@@ -1,10 +1,4 @@
-import {
-  BasicExampleFactory,
-  HelperExampleFactory,
-  KeyExampleFactory,
-  PromptExampleFactory,
-  UIExampleFactory,
-} from "./modules/examples";
+import { NewTabModule } from "./modules/new_tab";
 import { config } from "../package.json";
 import { getString, initLocale } from "./utils/locale";
 import { registerPrefsScripts } from "./modules/preferenceScript";
@@ -17,21 +11,9 @@ async function onStartup() {
     Zotero.uiReadyPromise,
   ]);
 
-  initLocale();
+  initLocale(); 
 
-  BasicExampleFactory.registerPrefs();
-
-  BasicExampleFactory.registerNotifier();
-
-  KeyExampleFactory.registerShortcuts();
-
-  await UIExampleFactory.registerExtraColumn();
-
-  await UIExampleFactory.registerExtraColumnWithCustomCell();
-
-  UIExampleFactory.registerItemPaneSection();
-
-  UIExampleFactory.registerReaderItemPaneSection();
+  const newTab = new NewTabModule();
 
   await onMainWindowLoad(window);
 }
@@ -39,9 +21,6 @@ async function onStartup() {
 async function onMainWindowLoad(win: Window): Promise<void> {
   // Create ztoolkit for every window
   addon.data.ztoolkit = createZToolkit();
-
-  // @ts-ignore This is a moz feature
-  window.MozXULElement.insertFTLIfNeeded(`${config.addonRef}-mainWindow.ftl`);
 
   const popupWin = new ztoolkit.ProgressWindow(config.addonName, {
     closeOnClick: true,
@@ -60,22 +39,6 @@ async function onMainWindowLoad(win: Window): Promise<void> {
     text: `[30%] ${getString("startup-begin")}`,
   });
 
-  UIExampleFactory.registerStyleSheet();
-
-  UIExampleFactory.registerRightClickMenuItem();
-
-  UIExampleFactory.registerRightClickMenuPopup();
-
-  UIExampleFactory.registerWindowMenuWithSeparator();
-
-  await UIExampleFactory.registerCustomItemBoxRow();
-
-  PromptExampleFactory.registerNormalCommandExample();
-
-  PromptExampleFactory.registerAnonymousCommandExample();
-
-  PromptExampleFactory.registerConditionalCommandExample();
-
   await Zotero.Promise.delay(1000);
 
   popupWin.changeLine({
@@ -83,8 +46,6 @@ async function onMainWindowLoad(win: Window): Promise<void> {
     text: `[100%] ${getString("startup-finish")}`,
   });
   popupWin.startCloseTimer(5000);
-
-  addon.hooks.onDialogEvents("dialogExample");
 }
 
 async function onMainWindowUnload(win: Window): Promise<void> {
@@ -93,11 +54,6 @@ async function onMainWindowUnload(win: Window): Promise<void> {
 }
 
 function onShutdown(): void {
-  ztoolkit.unregisterAll();
-  addon.data.dialog?.window?.close();
-  // Remove addon object
-  addon.data.alive = false;
-  delete Zotero[config.addonInstance];
 }
 
 /**
@@ -140,38 +96,9 @@ async function onPrefsEvent(type: string, data: { [key: string]: any }) {
 }
 
 function onShortcuts(type: string) {
-  switch (type) {
-    case "larger":
-      KeyExampleFactory.exampleShortcutLargerCallback();
-      break;
-    case "smaller":
-      KeyExampleFactory.exampleShortcutSmallerCallback();
-      break;
-    default:
-      break;
-  }
 }
 
 function onDialogEvents(type: string) {
-  switch (type) {
-    case "dialogExample":
-      HelperExampleFactory.dialogExample();
-      break;
-    case "clipboardExample":
-      HelperExampleFactory.clipboardExample();
-      break;
-    case "filePickerExample":
-      HelperExampleFactory.filePickerExample();
-      break;
-    case "progressWindowExample":
-      HelperExampleFactory.progressWindowExample();
-      break;
-    case "vtableExample":
-      HelperExampleFactory.vtableExample();
-      break;
-    default:
-      break;
-  }
 }
 
 // Add your hooks here. For element click, etc.
